@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com">
     <title>Teen Skill Bridge - Empowering Youth</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Google Sign-In SDK -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <style>
         * {
@@ -23,6 +26,7 @@
             --accent-secondary: #764ba2;
             --accent-pink: #f25f5c;
             --accent-cyan: #00d4ff;
+            --accent-green: #00FF41;
         }
 
         body {
@@ -102,12 +106,6 @@
             padding: 2.5rem;
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .about-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-primary);
         }
 
         .about-card h3 {
@@ -116,15 +114,8 @@
             margin-bottom: 1rem;
         }
 
-        .about-card p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
         .about-card ul {
             list-style: none;
-            padding: 0;
         }
 
         .about-card ul li {
@@ -139,7 +130,6 @@
             position: absolute;
             left: 0;
             color: var(--accent-primary);
-            font-weight: bold;
         }
 
         .role-selection {
@@ -151,7 +141,6 @@
         .role-selection h2 {
             font-size: 2rem;
             margin-bottom: 2rem;
-            color: var(--text-primary);
         }
 
         .role-buttons {
@@ -450,7 +439,6 @@
             border-radius: 15px;
             overflow: hidden;
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
         .video-card:hover {
@@ -466,7 +454,6 @@
             align-items: center;
             justify-content: center;
             font-size: 2.5rem;
-            position: relative;
         }
 
         .video-info {
@@ -478,7 +465,6 @@
             font-weight: 600;
             margin-bottom: 0.3rem;
             font-size: 1rem;
-            line-height: 1.3;
         }
 
         .video-category {
@@ -507,6 +493,66 @@
         .watch-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Jobs Grid */
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .job-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+            border-color: var(--accent-primary);
+        }
+
+        .job-card h3 {
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .job-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .job-detail-item strong {
+            color: var(--accent-pink);
+            min-width: 100px;
+        }
+
+        .apply-job-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .apply-job-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
         }
 
         /* Profile Section */
@@ -551,6 +597,17 @@
             font-weight: 500;
         }
 
+        .no-jobs {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .no-jobs h3 {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
@@ -558,15 +615,12 @@
             .videos-grid {
                 grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             }
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
             .dashboard-header {
                 flex-direction: column;
                 align-items: flex-start;
-            }
-            .social-auth {
-                flex-direction: column;
-            }
-            .social-btn {
-                width: 100%;
             }
         }
     </style>
@@ -588,7 +642,7 @@
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="totalUsers">0</div>
-                <div class="stat-label">Users (Enrolled) ✅</div>
+                <div class="stat-label">Users Enrolled ✅</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="totalMoney">₹0</div>
@@ -603,18 +657,16 @@
         <div class="about-section">
             <div class="about-card">
                 <h3>📚 For Students</h3>
-                <p>Learn coding, video editing, and more from expert-curated YouTube tutorials. Join thousands of students already building their future.</p>
                 <ul>
                     <li>50+ Free Learning Videos</li>
-                    <li>Expert Guidance & Resources</li>
-                    <li>Real Opportunities to Earn</li>
+                    <li>Browse Available Jobs</li>
+                    <li>Earn Real Money</li>
                     <li>Build Your Portfolio</li>
                 </ul>
             </div>
 
             <div class="about-card">
                 <h3>💼 For Job Providers</h3>
-                <p>Discover talented students skilled in coding and video editing. Post projects and connect with the next generation of creators.</p>
                 <ul>
                     <li>Access Skilled Teen Talent</li>
                     <li>Post & Manage Projects</li>
@@ -638,13 +690,12 @@
         <button class="close-btn" onclick="closeAuthModal()">×</button>
         <h2 id="authTitle" style="color: var(--accent-cyan); margin-bottom: 1.5rem; text-align: center;">Sign Up</h2>
 
-        <!-- Social Auth Buttons with Icons -->
         <div class="social-auth">
-            <button class="social-btn" onclick="googleAuth()" style="border: 1px solid #4285F4; background: rgba(66, 133, 244, 0.1);">
+            <button class="social-btn" onclick="googleAuthStart()">
                 <span class="icon">🔵</span>
                 <span>Google</span>
             </button>
-            <button class="social-btn" onclick="appleAuth()" style="border: 1px solid #999; background: rgba(100, 100, 100, 0.1);">
+            <button class="social-btn" onclick="appleAuth()">
                 <span class="icon">🍎</span>
                 <span>Mac/Apple</span>
             </button>
@@ -679,7 +730,6 @@
         </form>
     </div>
 
-    <!-- Modal Overlay -->
     <div id="authModalOverlay" class="modal-overlay" onclick="closeAuthModal()"></div>
 
     <!-- Student Dashboard -->
@@ -694,6 +744,7 @@
 
         <div class="dashboard-nav">
             <button class="nav-btn active" onclick="switchSection('videos')">🎓 Learning Videos</button>
+            <button class="nav-btn" onclick="switchSection('earnings')">💰 Earnings (Jobs)</button>
             <button class="nav-btn" onclick="switchSection('profile')">👤 My Profile</button>
         </div>
 
@@ -702,8 +753,18 @@
             <div class="content-section active" id="videosSection">
                 <h2 style="color: var(--accent-cyan); text-align: center; margin-bottom: 2rem;">50+ Free Learning Videos</h2>
                 <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Master Coding & Video Editing from Expert YouTube Tutorials</p>
-                <div class="videos-grid" id="videosGrid">
-                    <!-- Videos will load here -->
+                <div class="videos-grid" id="videosGrid"></div>
+            </div>
+
+            <!-- Earnings Section (Jobs) -->
+            <div class="content-section" id="earningsSection">
+                <h2 style="color: var(--accent-green); text-align: center; margin-bottom: 1rem;">💰 Available Earning Opportunities</h2>
+                <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Browse registered jobs and apply to earn money</p>
+                <div class="jobs-grid" id="jobsGrid">
+                    <div class="no-jobs">
+                        <h3>No Jobs Available Yet</h3>
+                        <p>Check back soon for new earning opportunities!</p>
+                    </div>
                 </div>
             </div>
 
@@ -730,7 +791,7 @@
                         <span id="profileSkills">-</span>
                     </div>
                     <div class="profile-item">
-                        <strong>💰 Money Earned:</strong>
+                        <strong>💵 Total Earned:</strong>
                         <span id="profileMoney" style="color: var(--accent-pink); font-weight: 700;">₹0</span>
                     </div>
                     <div class="profile-item">
@@ -745,161 +806,140 @@
     <script>
         // YouTube Videos Database (50+ videos)
         const youtubeVideos = [
-            // CODING - Python
             { title: "Python Basics for Beginners", category: "Python", videoId: "rfscVS0vtik" },
             { title: "Python Functions & Modules", category: "Python", videoId: "OWw6bwgpupY" },
             { title: "Python OOP - Classes & Objects", category: "Python", videoId: "JeznW_7DlrQ" },
             { title: "Python Web Development Django", category: "Python", videoId: "rHux0gMZ3Eg" },
-
-            // CODING - JavaScript
             { title: "JavaScript Tutorial for Beginners", category: "JavaScript", videoId: "W6NZfCO5SIk" },
             { title: "JavaScript ES6 Features", category: "JavaScript", videoId: "ZnK0pWMazZg" },
             { title: "Async/Await in JavaScript", category: "JavaScript", videoId: "V_Kr9OSfDeU" },
             { title: "JavaScript DOM Manipulation", category: "JavaScript", videoId: "wfoDRwcKPBI" },
-
-            // CODING - Web
             { title: "HTML Basics - Complete Guide", category: "Web", videoId: "mU6anWqZJcc" },
             { title: "CSS Flexbox Explained", category: "Web", videoId: "qqDH0-_z1x8" },
             { title: "CSS Grid Mastery", category: "Web", videoId: "EiNiSFaNAzI" },
             { title: "Responsive Web Design", category: "Web", videoId: "srvUrASNj0s" },
-
-            // CODING - React
             { title: "React.js Tutorial Beginner", category: "React", videoId: "SqcY0GlETPk" },
             { title: "React Hooks Explained", category: "React", videoId: "TNhaISOUy6Q" },
             { title: "React State & Props", category: "React", videoId: "ey7H8h4ub4E" },
             { title: "Build a React Todo App", category: "React", videoId: "G7Z48tQjHjY" },
-
-            // CODING - Node.js
             { title: "Node.js Crash Course", category: "Node.js", videoId: "PBTYxXADG_k" },
             { title: "Express.js REST API", category: "Node.js", videoId: "L72fhGm1tfE" },
             { title: "MongoDB with Node.js", category: "Node.js", videoId: "0bnvijmqVZo" },
             { title: "Authentication in Node.js", category: "Node.js", videoId: "L7_ypR3f7gA" },
-
-            // CODING - SQL
             { title: "SQL Tutorial - Beginners", category: "Database", videoId: "HXV3zeQKqGY" },
             { title: "MySQL Database Design", category: "Database", videoId: "4zYJX3yNlYE" },
             { title: "Database Normalization", category: "Database", videoId: "Rjh0qQR0vmo" },
-
-            // VIDEO EDITING - DaVinci
-            { title: "DaVinci Resolve Beginners Guide", category: "Video Editing", videoId: "c6vPK4nxSOs" },
-            { title: "Video Editing Basics - Cut & Trim", category: "Video Editing", videoId: "61rA0O2oCHI" },
+            { title: "DaVinci Resolve Beginners", category: "Video Editing", videoId: "c6vPK4nxSOs" },
+            { title: "Video Editing Basics", category: "Video Editing", videoId: "61rA0O2oCHI" },
             { title: "Color Grading in Video", category: "Video Editing", videoId: "dSP3IGmW3zo" },
             { title: "Add Transitions & Effects", category: "Video Editing", videoId: "0fLiZy5CgyE" },
-
-            // VIDEO EDITING - Adobe
             { title: "Adobe Premiere Pro Tutorial", category: "Video Editing", videoId: "63Ln33O4p4c" },
             { title: "Video Transitions Mastery", category: "Video Editing", videoId: "OEeFBq8xJEs" },
             { title: "Green Screen Chroma Key", category: "Video Editing", videoId: "oU6FdZTqWbE" },
             { title: "Audio Mixing for Videos", category: "Video Editing", videoId: "LY1_6qDEKnQ" },
-
-            // VIDEO EDITING - CapCut
             { title: "CapCut Tutorial - Beginners", category: "Video Editing", videoId: "uGZ3pQ5K0aQ" },
             { title: "CapCut Effects & Transitions", category: "Video Editing", videoId: "oQJKz6BqbQQ" },
             { title: "How to Edit Videos Like TikTok", category: "Video Editing", videoId: "8xI9x7qZFBA" },
-
-            // VIDEO EDITING - Advanced
             { title: "Motion Graphics & Animation", category: "Video Editing", videoId: "uljt8Vw-6kQ" },
             { title: "Video Title & Text Effects", category: "Video Editing", videoId: "3Cmi9G8u3io" },
             { title: "Keyframe Animation Basics", category: "Video Editing", videoId: "4F5LkpXQJBE" },
             { title: "Video Speed Ramping", category: "Video Editing", videoId: "RZQtIdbKlAo" },
-
-            // Other Languages
             { title: "Java Programming Basics", category: "Java", videoId: "eIrMbAQSU34" },
             { title: "C++ Tutorial for Beginners", category: "C++", videoId: "vLnPJ8305LP" },
             { title: "PHP Web Development", category: "PHP", videoId: "BUCisTNzGS8" },
-
-            // Tools
             { title: "Git & GitHub Tutorial", category: "Tools", videoId: "RGOj5yH7evk" },
             { title: "Command Line Basics", category: "Tools", videoId: "j6IsHBzDXbE" },
-
-            // YouTube Optimization
             { title: "Optimize Videos for YouTube", category: "Video Editing", videoId: "eGFzFvyuAo8" },
             { title: "YouTube Thumbnails Design", category: "Video Editing", videoId: "bZNTGzpqU0U" },
-            { title: "Video SEO & Analytics", category: "Video Editing", videoId: "uQ5nzQ0bYJc" }
+            { title: "Video SEO & Analytics", category: "Video Editing", videoId: "uQ5nzQ0bYJc" },
+            { title: "Web Development Bootcamp", category: "Web", videoId: "jS4aFq5-91M" },
+            { title: "Full Stack JavaScript", category: "JavaScript", videoId: "Oe421EPjeBE" },
+            { title: "Machine Learning Basics", category: "Python", videoId: "HcqpanDmdqQ" }
         ];
 
         let currentUserRole = 'student';
 
-        // Initialize App
+        // Initialize
         function initApp() {
             recordVisitor();
             checkLoginStatus();
+            checkAutoLogin();
             updateGlobalStats();
         }
 
-        // Record Site Visitors
+        // Record Visitor
         function recordVisitor() {
             let visitors = parseInt(localStorage.getItem('teenskillbridge_visitors') || '0');
             visitors++;
             localStorage.setItem('teenskillbridge_visitors', visitors.toString());
         }
 
-        // Check Login Status
-        function checkLoginStatus() {
-            const currentUser = localStorage.getItem('teenskillbridge_currentUser');
-            if (currentUser) {
-                document.getElementById('landingPage').classList.add('hidden');
-                document.getElementById('studentDashboard').classList.add('active');
-                loadUserProfile();
-                loadVideos();
+        // Check Auto Login from Google
+        function checkAutoLogin() {
+            const savedUser = localStorage.getItem('teenskillbridge_currentUser');
+            if (!savedUser && google && google.accounts && google.accounts.id) {
+                google.accounts.id.initialize({
+                    client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+                    callback: googleAuthCallback
+                });
             }
         }
 
-        // Update Global Stats
-        function updateGlobalStats() {
-            const students = JSON.parse(localStorage.getItem('teenskillbridge_allStudents') || '[]');
-            const visitors = parseInt(localStorage.getItem('teenskillbridge_visitors') || '0');
-            const uniqueUsers = students.length;
-            const totalEarned = students.reduce((sum, s) => sum + (s.money || 0), 0);
-
-            document.getElementById('totalVisitors').textContent = visitors;
-            document.getElementById('totalUsers').textContent = uniqueUsers;
-            document.getElementById('totalMoney').textContent = '₹' + totalEarned;
-            document.getElementById('totalJobs').textContent = Math.max(1, Math.floor(uniqueUsers * 0.5));
+        // Google Auth Callback
+        function googleAuthCallback(response) {
+            if (response.credential) {
+                const userData = parseGoogleJWT(response.credential);
+                handleGoogleAuth(userData);
+            }
         }
 
-        // Open Auth Modal
-        function openAuthModal(role) {
-            currentUserRole = role;
-            document.getElementById('authModal').classList.add('active');
-            document.getElementById('authModalOverlay').classList.add('active');
-            document.getElementById('authTitle').textContent = role === 'student' ? '📚 Enroll as Student' : '💼 Enroll as Job Provider';
+        // Parse Google JWT
+        function parseGoogleJWT(token) {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        }
 
-            if (role === 'provider') {
-                document.getElementById('ageGroup').style.display = 'none';
-                document.getElementById('qualificationGroup').style.display = 'none';
-                document.getElementById('skillsGroup').style.display = 'none';
+        // Start Google Auth
+        function googleAuthStart() {
+            if (google && google.accounts && google.accounts.id) {
+                google.accounts.id.initialize({
+                    client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+                    callback: googleAuthWithPrompt
+                });
+                google.accounts.id.renderButton(
+                    document.body,
+                    { theme: "outline", size: "large" }
+                );
+                google.accounts.id.prompt();
             } else {
-                document.getElementById('ageGroup').style.display = 'block';
-                document.getElementById('qualificationGroup').style.display = 'block';
-                document.getElementById('skillsGroup').style.display = 'block';
+                alert('❌ Google Sign-In not available. Use Email or Mac instead.');
             }
         }
 
-        // Close Auth Modal
-        function closeAuthModal() {
-            document.getElementById('authModal').classList.remove('active');
-            document.getElementById('authModalOverlay').classList.remove('active');
+        // Google Auth With Prompt
+        function googleAuthWithPrompt(response) {
+            if (response.credential) {
+                const userData = parseGoogleJWT(response.credential);
+                handleGoogleAuth(userData);
+            }
         }
 
-        // Google Auth
-        function googleAuth() {
-            const name = prompt('📧 Enter your full name:');
-            if (!name) return;
-
-            const age = currentUserRole === 'student' ? prompt('🎂 Enter your age (13-25):') : null;
-            const qualification = currentUserRole === 'student' ? prompt('🎓 Enter your qualification (e.g., 12th Grade):') : null;
-            const skills = currentUserRole === 'student' ? prompt('🎯 Enter your skills/interests (comma separated):') : prompt('💼 Enter your company/details:');
-
+        // Handle Google Auth
+        function handleGoogleAuth(googleData) {
             const userData = {
                 id: Date.now(),
-                name: name,
-                email: name.toLowerCase().replace(/\s/g, '') + '@gmail.com',
-                age: age || 'N/A',
-                qualification: qualification || 'N/A',
-                skills: skills || 'N/A',
+                name: googleData.name,
+                email: googleData.email,
+                age: currentUserRole === 'student' ? prompt('Enter your age (13-25):') : 'N/A',
+                qualification: currentUserRole === 'student' ? prompt('Enter your qualification:') : 'N/A',
+                skills: currentUserRole === 'student' ? prompt('Enter your skills (comma separated):') : 'N/A',
                 role: currentUserRole,
                 authType: 'Google',
+                googleImage: googleData.picture,
                 money: 0,
                 joined: new Date().toLocaleDateString()
             };
@@ -912,9 +952,9 @@
             const name = prompt('🍎 Enter your full name:');
             if (!name) return;
 
-            const age = currentUserRole === 'student' ? prompt('🎂 Enter your age (13-25):') : null;
-            const qualification = currentUserRole === 'student' ? prompt('🎓 Enter your qualification (e.g., 12th Grade):') : null;
-            const skills = currentUserRole === 'student' ? prompt('🎯 Enter your skills/interests (comma separated):') : prompt('💼 Enter your company/details:');
+            const age = currentUserRole === 'student' ? prompt('Enter your age (13-25):') : null;
+            const qualification = currentUserRole === 'student' ? prompt('Enter your qualification:') : null;
+            const skills = currentUserRole === 'student' ? prompt('Enter your skills (comma separated):') : prompt('Enter your company/details:');
 
             const userData = {
                 id: Date.now(),
@@ -967,6 +1007,32 @@
             window.location.reload();
         }
 
+        // Check Login Status
+        function checkLoginStatus() {
+            const currentUser = localStorage.getItem('teenskillbridge_currentUser');
+            if (currentUser) {
+                document.getElementById('landingPage').classList.add('hidden');
+                document.getElementById('studentDashboard').classList.add('active');
+                loadUserProfile();
+                loadVideos();
+                loadJobs();
+            }
+        }
+
+        // Update Global Stats
+        function updateGlobalStats() {
+            const students = JSON.parse(localStorage.getItem('teenskillbridge_allStudents') || '[]');
+            const jobs = JSON.parse(localStorage.getItem('teenskillbridge_jobs') || '[]');
+            const visitors = parseInt(localStorage.getItem('teenskillbridge_visitors') || '0');
+            const uniqueUsers = students.length;
+            const totalEarned = students.reduce((sum, s) => sum + (s.money || 0), 0);
+
+            document.getElementById('totalVisitors').textContent = visitors;
+            document.getElementById('totalUsers').textContent = uniqueUsers;
+            document.getElementById('totalMoney').textContent = '₹' + totalEarned;
+            document.getElementById('totalJobs').textContent = jobs.length;
+        }
+
         // Load Videos
         function loadVideos() {
             const videosGrid = document.getElementById('videosGrid');
@@ -982,6 +1048,56 @@
                     </div>
                 </div>
             `).join('');
+        }
+
+        // Load Jobs
+        function loadJobs() {
+            const jobsGrid = document.getElementById('jobsGrid');
+            const jobs = JSON.parse(localStorage.getItem('teenskillbridge_jobs') || '[]');
+
+            if (jobs.length === 0) {
+                jobsGrid.innerHTML = `
+                    <div class="no-jobs" style="grid-column: 1/-1;">
+                        <h3>💼 No Jobs Available Yet</h3>
+                        <p>Check back soon for new earning opportunities!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            jobsGrid.innerHTML = jobs.map((job, idx) => `
+                <div class="job-card">
+                    <h3>${job.title}</h3>
+                    <div class="job-detail-item">
+                        <strong>💰 Salary:</strong>
+                        <span>₹${job.salary}</span>
+                    </div>
+                    <div class="job-detail-item">
+                        <strong>⏰ Duration:</strong>
+                        <span>${job.duration}</span>
+                    </div>
+                    <div class="job-detail-item">
+                        <strong>📅 Working Days:</strong>
+                        <span>${job.workingDays}</span>
+                    </div>
+                    <div class="job-detail-item">
+                        <strong>👥 For:</strong>
+                        <span>${job.gender}</span>
+                    </div>
+                    <div class="job-detail-item">
+                        <strong>📍 Posted:</strong>
+                        <span>${job.postedDate}</span>
+                    </div>
+                    <button class="apply-job-btn" onclick="applyJob('${job.email}', '${job.title}', ${job.salary})">
+                        ✅ Apply Now
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Apply Job
+        function applyJob(email, jobTitle, salary) {
+            window.location.href = `mailto:${email}?subject=Job Application: ${jobTitle} - ₹${salary}`;
         }
 
         // Load User Profile
@@ -1001,6 +1117,30 @@
             }
         }
 
+        // Open Auth Modal
+        function openAuthModal(role) {
+            currentUserRole = role;
+            document.getElementById('authModal').classList.add('active');
+            document.getElementById('authModalOverlay').classList.add('active');
+            document.getElementById('authTitle').textContent = role === 'student' ? '📚 Enroll as Student' : '💼 Enroll as Job Provider';
+
+            if (role === 'provider') {
+                document.getElementById('ageGroup').style.display = 'none';
+                document.getElementById('qualificationGroup').style.display = 'none';
+                document.getElementById('skillsGroup').style.display = 'none';
+            } else {
+                document.getElementById('ageGroup').style.display = 'block';
+                document.getElementById('qualificationGroup').style.display = 'block';
+                document.getElementById('skillsGroup').style.display = 'block';
+            }
+        }
+
+        // Close Auth Modal
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('active');
+            document.getElementById('authModalOverlay').classList.remove('active');
+        }
+
         // Switch Section
         function switchSection(section) {
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
@@ -1009,6 +1149,9 @@
 
             if (section === 'videos') {
                 document.getElementById('videosSection').classList.add('active');
+            } else if (section === 'earnings') {
+                document.getElementById('earningsSection').classList.add('active');
+                loadJobs();
             } else if (section === 'profile') {
                 document.getElementById('profileSection').classList.add('active');
             }
