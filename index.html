@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teen Skill Bridge - Empowering Youth</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js"></script>
-    
+
     <style>
         * {
             margin: 0;
@@ -163,7 +159,6 @@
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
         }
 
-        /* Student Dashboard */
         .student-dashboard {
             display: none;
             min-height: 100vh;
@@ -438,25 +433,22 @@
             cursor: pointer;
         }
 
-        .loading {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-secondary);
+        .success-msg {
+            background: rgba(0, 255, 65, 0.2);
+            color: #00FF41;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #00FF41;
         }
 
-        .spinner {
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top: 3px solid var(--accent-primary);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .info-msg {
+            background: rgba(102, 126, 234, 0.2);
+            color: var(--accent-cyan);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid var(--accent-cyan);
         }
 
         @media (max-width: 768px) {
@@ -595,9 +587,16 @@
             <p style="color: var(--text-secondary);">Welcome! Explore opportunities and grow your skills</p>
         </div>
 
+        <div class="info-msg">
+            <strong>ℹ️ Note:</strong> Data is stored locally in your browser. It will be visible to other users on this browser only.
+        </div>
+
         <h2 style="color: var(--accent-cyan); text-align: center; margin-bottom: 2rem;">Available Job Opportunities</h2>
         <div class="jobs-grid" id="jobsGrid">
-            <div class="loading"><div class="spinner"></div>Loading jobs...</div>
+            <div class="glass-card" style="text-align: center; grid-column: 1/-1;">
+                <h3 style="color: var(--text-secondary);">No jobs posted yet</h3>
+                <p style="color: var(--text-secondary);">Check back soon for new opportunities!</p>
+            </div>
         </div>
     </div>
 
@@ -609,34 +608,32 @@
             <p style="color: var(--text-secondary);">Browse enrolled students and find the perfect match</p>
         </div>
 
+        <div class="info-msg">
+            <strong>ℹ️ Note:</strong> Data is stored locally in your browser. Students will appear here once they enroll.
+        </div>
+
         <div style="text-align: center; margin-bottom: 3rem;">
             <button class="apply-btn" style="max-width: 300px;" onclick="openModal('providerSignupModal')">+ Post New Job</button>
         </div>
 
         <h2 style="color: var(--accent-cyan); text-align: center; margin-bottom: 2rem;">Enrolled Students</h2>
         <div class="students-grid" id="studentsGrid">
-            <div class="loading"><div class="spinner"></div>Loading students...</div>
+            <div class="glass-card" style="text-align: center; grid-column: 1/-1;">
+                <h3 style="color: var(--text-secondary);">No students enrolled yet</h3>
+                <p style="color: var(--text-secondary);">Students will appear here soon</p>
+            </div>
         </div>
     </div>
 
     <script>
-        // Firebase Configuration - UPDATE WITH YOUR CREDENTIALS
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            databaseURL: "YOUR_DATABASE_URL",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-
-        // Initialize Firebase
-        try {
-            firebase.initializeApp(firebaseConfig);
-            const database = firebase.database();
-        } catch (error) {
-            console.error("Firebase initialization error:", error);
+        // Initialize localStorage
+        function initApp() {
+            if (!localStorage.getItem('teenskillbridge_students')) {
+                localStorage.setItem('teenskillbridge_students', JSON.stringify([]));
+            }
+            if (!localStorage.getItem('teenskillbridge_jobs')) {
+                localStorage.setItem('teenskillbridge_jobs', JSON.stringify([]));
+            }
         }
 
         // Modal functions
@@ -668,8 +665,9 @@
         // Handle student signup
         document.getElementById('studentSignupForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const student = {
+                id: Date.now(),
                 name: document.getElementById('studentName').value,
                 email: document.getElementById('studentEmail').value,
                 age: document.getElementById('studentAge').value,
@@ -678,28 +676,25 @@
                 enrolledDate: new Date().toLocaleDateString()
             };
 
-            if (typeof firebase !== 'undefined') {
-                const database = firebase.database();
-                database.ref('students').push(student).then(() => {
-                    alert('Enrollment successful! Welcome! 🎉');
-                    this.reset();
-                    closeAllModals();
-                    document.getElementById('landingPage').classList.add('hidden');
-                    document.getElementById('studentDashboard').classList.add('active');
-                    loadJobs();
-                }).catch(error => {
-                    alert('Error: ' + error.message);
-                });
-            } else {
-                alert('Firebase not initialized. Please check your configuration.');
-            }
+            // Save to localStorage
+            let students = JSON.parse(localStorage.getItem('teenskillbridge_students') || '[]');
+            students.push(student);
+            localStorage.setItem('teenskillbridge_students', JSON.stringify(students));
+
+            alert('✅ Enrollment successful! Welcome to Teen Skill Bridge! 🎉');
+            this.reset();
+            closeAllModals();
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('studentDashboard').classList.add('active');
+            loadJobs();
         });
 
         // Handle provider job posting
         document.getElementById('providerSignupForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             const job = {
+                id: Date.now(),
                 title: document.getElementById('providerJobTitle').value,
                 gender: document.getElementById('providerGender').value,
                 salary: document.getElementById('providerSalary').value,
@@ -709,87 +704,79 @@
                 postedDate: new Date().toLocaleDateString()
             };
 
-            if (typeof firebase !== 'undefined') {
-                const database = firebase.database();
-                database.ref('jobs').push(job).then(() => {
-                    alert('Job posted successfully! 🎯');
-                    this.reset();
-                    closeAllModals();
-                    document.getElementById('landingPage').classList.add('hidden');
-                    document.getElementById('providerDashboard').classList.add('active');
-                    loadStudents();
-                }).catch(error => {
-                    alert('Error: ' + error.message);
-                });
-            } else {
-                alert('Firebase not initialized. Please check your configuration.');
-            }
+            // Save to localStorage
+            let jobs = JSON.parse(localStorage.getItem('teenskillbridge_jobs') || '[]');
+            jobs.push(job);
+            localStorage.setItem('teenskillbridge_jobs', JSON.stringify(jobs));
+
+            alert('✅ Job posted successfully! 🎯');
+            this.reset();
+            closeAllModals();
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('providerDashboard').classList.add('active');
+            loadStudents();
         });
 
         // Load jobs
         function loadJobs() {
+            const jobs = JSON.parse(localStorage.getItem('teenskillbridge_jobs') || '[]');
             const jobsGrid = document.getElementById('jobsGrid');
-            jobsGrid.innerHTML = '<div class="loading"><div class="spinner"></div>Loading jobs...</div>';
-            
-            if (typeof firebase === 'undefined') return;
-            
-            const database = firebase.database();
-            database.ref('jobs').once('value').then(snapshot => {
-                const jobs = snapshot.val() || {};
-                
-                if (Object.keys(jobs).length === 0) {
-                    jobsGrid.innerHTML = '<div class="glass-card" style="text-align: center; grid-column: 1/-1;"><h3 style="color: var(--text-secondary);">No jobs posted yet</h3></div>';
-                    return;
-                }
 
-                jobsGrid.innerHTML = Object.entries(jobs).map(([id, job]) => `
-                    <div class="job-card">
-                        <h3>${job.title}</h3>
-                        <div class="job-detail-item"><strong>💰 Salary:</strong> <span>₹${job.salary}</span></div>
-                        <div class="job-detail-item"><strong>⏰ Duration:</strong> <span>${job.duration}</span></div>
-                        <div class="job-detail-item"><strong>📅 Days:</strong> <span>${job.workingDays}</span></div>
-                        <div class="job-detail-item"><strong>👥 For:</strong> <span>${job.gender}</span></div>
-                        <button class="apply-btn" onclick="applyForJob('${job.email}')">Apply Now →</button>
+            if (jobs.length === 0) {
+                jobsGrid.innerHTML = `
+                    <div class="glass-card" style="text-align: center; grid-column: 1/-1;">
+                        <h3 style="color: var(--text-secondary);">No jobs posted yet</h3>
+                        <p style="color: var(--text-secondary);">Check back soon for new opportunities!</p>
                     </div>
-                `).join('');
-            });
+                `;
+                return;
+            }
+
+            jobsGrid.innerHTML = jobs.map(job => `
+                <div class="job-card">
+                    <h3>${job.title}</h3>
+                    <div class="job-detail-item"><strong>💰 Salary:</strong> <span>₹${job.salary}</span></div>
+                    <div class="job-detail-item"><strong>⏰ Duration:</strong> <span>${job.duration}</span></div>
+                    <div class="job-detail-item"><strong>📅 Days:</strong> <span>${job.workingDays}</span></div>
+                    <div class="job-detail-item"><strong>👥 For:</strong> <span>${job.gender}</span></div>
+                    <button class="apply-btn" onclick="applyForJob('${job.email}', '${job.title}')">Apply Now →</button>
+                </div>
+            `).join('');
         }
 
         // Load students
         function loadStudents() {
+            const students = JSON.parse(localStorage.getItem('teenskillbridge_students') || '[]');
             const studentsGrid = document.getElementById('studentsGrid');
-            studentsGrid.innerHTML = '<div class="loading"><div class="spinner"></div>Loading students...</div>';
-            
-            if (typeof firebase === 'undefined') return;
-            
-            const database = firebase.database();
-            database.ref('students').once('value').then(snapshot => {
-                const students = snapshot.val() || {};
-                
-                if (Object.keys(students).length === 0) {
-                    studentsGrid.innerHTML = '<div class="glass-card" style="text-align: center; grid-column: 1/-1;"><h3 style="color: var(--text-secondary);">No students enrolled yet</h3></div>';
-                    return;
-                }
 
-                studentsGrid.innerHTML = Object.entries(students).map(([id, student]) => {
-                    const initials = student.name.split(' ').map(n => n[0]).join('').toUpperCase();
-                    return `
-                        <div class="student-card">
-                            <div class="student-avatar">${initials}</div>
-                            <div class="student-info"><h3>${student.name}</h3></div>
-                            <div style="margin-top: 1.5rem;">
-                                <div class="student-detail"><strong>Email:</strong> <span>${student.email}</span></div>
-                                <div class="student-detail"><strong>Age:</strong> <span>${student.age}</span></div>
-                                <div class="student-detail"><strong>Qualification:</strong> <span>${student.qualification}</span></div>
-                            </div>
-                            <div class="skills-tags">
-                                ${student.skills.split(',').map(skill => `<span class="skill-tag">${skill.trim()}</span>`).join('')}
-                            </div>
-                            <button class="apply-btn" style="margin-top: 1.5rem;" onclick="contactStudent('${student.email}')">Contact Student</button>
+            if (students.length === 0) {
+                studentsGrid.innerHTML = `
+                    <div class="glass-card" style="text-align: center; grid-column: 1/-1;">
+                        <h3 style="color: var(--text-secondary);">No students enrolled yet</h3>
+                        <p style="color: var(--text-secondary);">Students will appear here soon</p>
+                    </div>
+                `;
+                return;
+            }
+
+            studentsGrid.innerHTML = students.map(student => {
+                const initials = student.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                return `
+                    <div class="student-card">
+                        <div class="student-avatar">${initials}</div>
+                        <div class="student-info"><h3>${student.name}</h3></div>
+                        <div style="margin-top: 1.5rem;">
+                            <div class="student-detail"><strong>Email:</strong> <span>${student.email}</span></div>
+                            <div class="student-detail"><strong>Age:</strong> <span>${student.age}</span></div>
+                            <div class="student-detail"><strong>Qualification:</strong> <span>${student.qualification}</span></div>
                         </div>
-                    `;
-                }).join('');
-            });
+                        <div class="skills-tags">
+                            ${student.skills.split(',').map(skill => `<span class="skill-tag">${skill.trim()}</span>`).join('')}
+                        </div>
+                        <button class="apply-btn" style="margin-top: 1.5rem;" onclick="contactStudent('${student.email}', '${student.name}')">Contact Student</button>
+                    </div>
+                `;
+            }).join('');
         }
 
         // Helper functions
@@ -799,13 +786,18 @@
             document.getElementById('providerDashboard').classList.remove('active');
         }
 
-        function applyForJob(email) {
-            window.location.href = `mailto:${email}?subject=Job Application from Teen Skill Bridge`;
+        function applyForJob(email, jobTitle) {
+            window.location.href = `mailto:${email}?subject=Job Application: ${jobTitle} - Teen Skill Bridge`;
         }
 
-        function contactStudent(email) {
+        function contactStudent(email, studentName) {
             window.location.href = `mailto:${email}?subject=Job Opportunity from Teen Skill Bridge`;
         }
+
+        // Initialize on load
+        window.addEventListener('load', function() {
+            initApp();
+        });
     </script>
 </body>
 </html>
