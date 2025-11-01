@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,7 +32,7 @@
             line-height: 1.6;
         }
 
-        /* Landing Page Styles */
+        /* Landing Page */
         .landing-page {
             display: block;
             min-height: 100vh;
@@ -59,6 +59,34 @@
         .header p {
             color: var(--text-secondary);
             font-size: 1.2rem;
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
         .about-section {
@@ -159,142 +187,50 @@
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
         }
 
-        .student-dashboard {
+        /* Auth Modal */
+        .auth-modal {
             display: none;
-            min-height: 100vh;
-            padding: 2rem;
-        }
-
-        .student-dashboard.active {
-            display: block;
-        }
-
-        .provider-dashboard {
-            display: none;
-            min-height: 100vh;
-            padding: 2rem;
-        }
-
-        .provider-dashboard.active {
-            display: block;
-        }
-
-        .dashboard-header {
-            text-align: center;
-            padding: 2rem 0;
-            margin-bottom: 3rem;
-        }
-
-        .dashboard-header h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-        }
-
-        .back-btn {
             position: fixed;
-            top: 2rem;
-            left: 2rem;
-            padding: 0.8rem 1.5rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 450px;
+            z-index: 1000;
+            padding: 2.5rem;
             background: var(--bg-card);
+            border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .auth-modal.active {
+            display: block;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+        }
+
+        .modal-overlay.active {
+            display: block;
+        }
+
+        .close-btn {
+            float: right;
+            background: none;
+            border: none;
             color: var(--text-primary);
+            font-size: 1.5rem;
             cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-
-        .back-btn:hover {
-            background: var(--accent-primary);
-            border-color: transparent;
-        }
-
-        .glass-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .students-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 2rem auto;
-        }
-
-        .student-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .student-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
-            border-color: var(--accent-primary);
-        }
-
-        .student-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-primary), var(--accent-pink));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: bold;
-            margin: 0 auto 1.5rem;
-            color: white;
-        }
-
-        .student-info h3 {
-            color: var(--accent-cyan);
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-
-        .student-detail {
-            display: flex;
-            justify-content: space-between;
-            padding: 0.8rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .student-detail strong {
-            color: var(--text-secondary);
-        }
-
-        .student-detail span {
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        .skills-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            justify-content: center;
-        }
-
-        .skill-tag {
-            background: rgba(102, 126, 234, 0.2);
-            color: var(--accent-cyan);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
         }
 
         .form-group {
@@ -328,7 +264,7 @@
             background: rgba(255, 255, 255, 0.1);
         }
 
-        .apply-btn {
+        .auth-btn {
             width: 100%;
             padding: 1rem;
             border: none;
@@ -339,130 +275,280 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            margin-bottom: 1rem;
         }
 
-        .apply-btn:hover {
+        .auth-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
         }
 
-        .jobs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .job-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .job-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
-        }
-
-        .job-card h3 {
-            color: var(--accent-cyan);
-            margin-bottom: 1rem;
-        }
-
-        .job-card p {
-            color: var(--text-secondary);
+        .social-auth {
+            display: flex;
+            gap: 1rem;
             margin-bottom: 1.5rem;
         }
 
-        .job-detail-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-primary);
-            margin-bottom: 0.8rem;
+        .social-btn {
+            flex: 1;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
         }
 
-        .job-detail-item strong {
-            color: var(--accent-pink);
-            min-width: 100px;
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-primary);
         }
 
-        .modal {
-            display: none;
-            position: fixed;
+        .divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 500px;
-            z-index: 1000;
-            padding: 2rem;
-            background: var(--bg-card);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .modal.active {
-            display: block;
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 999;
+            right: 0;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
         }
 
-        .modal-overlay.active {
+        .divider span {
+            background: var(--bg-card);
+            padding: 0 1rem;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        /* Student Dashboard */
+        .student-dashboard {
+            display: none;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .student-dashboard.active {
             display: block;
         }
 
-        .close-btn {
-            float: right;
-            background: none;
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logout-btn {
+            padding: 0.8rem 1.5rem;
+            background: var(--accent-pink);
             border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .dashboard-nav {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 1rem 2rem;
+            background: var(--bg-card);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
             color: var(--text-primary);
-            font-size: 1.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-color: transparent;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .dashboard-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Videos Grid */
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .video-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
             cursor: pointer;
         }
 
-        .success-msg {
-            background: rgba(0, 255, 65, 0.2);
-            color: #00FF41;
-            padding: 1rem;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            border: 1px solid #00FF41;
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
         }
 
-        .info-msg {
+        .video-thumbnail {
+            width: 100%;
+            height: 170px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .video-info {
+            padding: 1rem;
+        }
+
+        .video-title {
+            color: var(--accent-cyan);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+            line-height: 1.3;
+        }
+
+        .video-category {
+            display: inline-block;
             background: rgba(102, 126, 234, 0.2);
             color: var(--accent-cyan);
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .watch-btn {
+            width: 100%;
+            padding: 0.7rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .watch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Profile Section */
+        .profile-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 700px;
+            margin: 2rem auto;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-pink));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+            color: white;
+        }
+
+        .profile-item {
+            display: flex;
+            justify-content: space-between;
             padding: 1rem;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
             margin-bottom: 1rem;
-            border: 1px solid var(--accent-cyan);
+        }
+
+        .profile-item strong {
+            color: var(--text-secondary);
+        }
+
+        .profile-item span {
+            color: var(--text-primary);
+            font-weight: 500;
         }
 
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
             }
-            .about-section {
-                grid-template-columns: 1fr;
+            .videos-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             }
-            .role-buttons {
+            .dashboard-header {
                 flex-direction: column;
-            }
-            .role-btn {
-                width: 100%;
+                align-items: flex-start;
             }
         }
     </style>
@@ -476,26 +562,46 @@
             <p>Empowering Youth Through Skill Development and Financial Independence</p>
         </div>
 
+        <!-- Live Statistics Section -->
+        <div class="stats-section">
+            <div class="stat-card">
+                <div class="stat-number" id="totalUsers">0</div>
+                <div class="stat-label">Active Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalMoney">₹0</div>
+                <div class="stat-label">Total Earned</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalStudents">0</div>
+                <div class="stat-label">Students</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalJobs">0</div>
+                <div class="stat-label">Jobs Posted</div>
+            </div>
+        </div>
+
         <div class="about-section">
             <div class="about-card">
                 <h3>📚 For Students</h3>
-                <p>If you're a student, this platform helps you discover your interests, connect with job opportunities, build real-world skills, and earn money safely while managing your schedule.</p>
+                <p>Learn coding, video editing, and more from expert-curated YouTube tutorials. Join thousands of students already building their future.</p>
                 <ul>
-                    <li>Find jobs that match your interests and skills</li>
-                    <li>Grow your professional confidence</li>
-                    <li>Start earning independently from a young age</li>
-                    <li>Build a portfolio of work and certificates</li>
+                    <li>50+ Free Learning Videos</li>
+                    <li>Expert Guidance & Resources</li>
+                    <li>Real Opportunities to Earn</li>
+                    <li>Build Your Portfolio</li>
                 </ul>
             </div>
 
             <div class="about-card">
                 <h3>💼 For Job Providers</h3>
-                <p>If you're a job provider, this platform lets you tap into the talent of motivated teens for flexible and creative work that fits your budget and timeline.</p>
+                <p>Discover talented students skilled in coding and video editing. Post projects and connect with the next generation of creators.</p>
                 <ul>
-                    <li>Post jobs for teenage applicants</li>
-                    <li>Specify roles, skills, duration, and salary</li>
-                    <li>Build relationships with next-gen workforce</li>
-                    <li>Access eager, tech-savvy talent</li>
+                    <li>Access Skilled Teen Talent</li>
+                    <li>Post & Manage Projects</li>
+                    <li>Find Perfect Fits</li>
+                    <li>Support Youth Development</li>
                 </ul>
             </div>
         </div>
@@ -503,295 +609,331 @@
         <div class="role-selection">
             <h2>How would you like to join?</h2>
             <div class="role-buttons">
-                <button class="role-btn student" onclick="startStudentSignup()">📚 Enroll as Student</button>
-                <button class="role-btn provider" onclick="startProviderSignup()">💼 Enroll as Job Provider</button>
+                <button class="role-btn student" onclick="openAuthModal('student')">📚 Enroll as Student</button>
+                <button class="role-btn provider" onclick="openAuthModal('provider')">💼 Enroll as Job Provider</button>
             </div>
         </div>
     </div>
 
-    <!-- Student Signup Modal -->
-    <div id="studentSignupModal" class="modal">
-        <button class="close-btn" onclick="closeModal('studentSignupModal')">×</button>
-        <h2 style="color: var(--accent-cyan); margin-bottom: 1.5rem;">Enroll as Student</h2>
-        <form id="studentSignupForm">
+    <!-- Auth Modal (Google/Mac/Email) -->
+    <div id="authModal" class="auth-modal">
+        <button class="close-btn" onclick="closeAuthModal()">×</button>
+        <h2 id="authTitle" style="color: var(--accent-cyan); margin-bottom: 1.5rem; text-align: center;">Sign Up</h2>
+
+        <div class="social-auth">
+            <button class="social-btn" onclick="alert('Google Sign-Up Coming Soon!')">🔵 Google</button>
+            <button class="social-btn" onclick="alert('Apple Sign-Up Coming Soon!')">🍎 Mac/Apple</button>
+        </div>
+
+        <div class="divider">
+            <span>Or continue with email</span>
+        </div>
+
+        <form id="signupForm">
             <div class="form-group">
                 <label>Name *</label>
-                <input type="text" id="studentName" required>
+                <input type="text" id="signupName" required>
             </div>
             <div class="form-group">
                 <label>Email *</label>
-                <input type="email" id="studentEmail" required>
+                <input type="email" id="signupEmail" required>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="ageGroup">
                 <label>Age *</label>
-                <input type="number" id="studentAge" min="13" max="25" required>
+                <input type="number" id="signupAge" min="13" max="25" required>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="qualificationGroup">
                 <label>Qualification *</label>
-                <input type="text" id="studentQualification" placeholder="e.g., 12th Grade" required>
+                <input type="text" id="signupQualification" placeholder="e.g., 12th Grade" required>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="skillsGroup">
                 <label>Skills/Interests (comma separated) *</label>
-                <textarea id="studentSkills" required></textarea>
+                <textarea id="signupSkills" placeholder="e.g., Coding, Video Editing" required></textarea>
             </div>
-            <button type="submit" class="apply-btn">Submit</button>
-        </form>
-    </div>
-
-    <!-- Provider Signup Modal -->
-    <div id="providerSignupModal" class="modal">
-        <button class="close-btn" onclick="closeModal('providerSignupModal')">×</button>
-        <h2 style="color: var(--accent-pink); margin-bottom: 1.5rem;">Post a Job</h2>
-        <form id="providerSignupForm">
-            <div class="form-group">
-                <label>Job Title *</label>
-                <input type="text" id="providerJobTitle" required>
-            </div>
-            <div class="form-group">
-                <label>For (Gender) *</label>
-                <select id="providerGender" required>
-                    <option value="">Select...</option>
-                    <option value="Boy">Boy</option>
-                    <option value="Girl">Girl</option>
-                    <option value="Both">Both</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Salary (₹) *</label>
-                <input type="number" id="providerSalary" min="0" required>
-            </div>
-            <div class="form-group">
-                <label>Duration *</label>
-                <input type="text" id="providerDuration" placeholder="e.g., 2 weeks" required>
-            </div>
-            <div class="form-group">
-                <label>Working Days *</label>
-                <input type="text" id="providerWorkingDays" placeholder="e.g., Mon-Fri" required>
-            </div>
-            <div class="form-group">
-                <label>Your Email *</label>
-                <input type="email" id="providerEmail" required>
-            </div>
-            <button type="submit" class="apply-btn">Post Job</button>
+            <button type="submit" class="auth-btn">Create Account</button>
         </form>
     </div>
 
     <!-- Modal Overlay -->
-    <div id="modalOverlay" class="modal-overlay" onclick="closeAllModals()"></div>
+    <div id="authModalOverlay" class="modal-overlay" onclick="closeAuthModal()"></div>
 
     <!-- Student Dashboard -->
     <div class="student-dashboard" id="studentDashboard">
-        <button class="back-btn" onclick="goBack()">← Back to Home</button>
         <div class="dashboard-header">
-            <h1>Student Dashboard</h1>
-            <p style="color: var(--text-secondary);">Welcome! Explore opportunities and grow your skills</p>
-        </div>
-
-        <div class="info-msg">
-            <strong>ℹ️ Note:</strong> Data is stored locally in your browser. It will be visible to other users on this browser only.
-        </div>
-
-        <h2 style="color: var(--accent-cyan); text-align: center; margin-bottom: 2rem;">Available Job Opportunities</h2>
-        <div class="jobs-grid" id="jobsGrid">
-            <div class="glass-card" style="text-align: center; grid-column: 1/-1;">
-                <h3 style="color: var(--text-secondary);">No jobs posted yet</h3>
-                <p style="color: var(--text-secondary);">Check back soon for new opportunities!</p>
+            <div>
+                <h1>Welcome, <span id="studentName">Student</span>! 👋</h1>
+                <p style="color: var(--text-secondary);">Learn, Grow, and Earn Skills</p>
             </div>
-        </div>
-    </div>
-
-    <!-- Provider Dashboard -->
-    <div class="provider-dashboard" id="providerDashboard">
-        <button class="back-btn" onclick="goBack()">← Back to Home</button>
-        <div class="dashboard-header">
-            <h1>Job Provider Dashboard</h1>
-            <p style="color: var(--text-secondary);">Browse enrolled students and find the perfect match</p>
+            <button class="logout-btn" onclick="logout()">🚪 Logout</button>
         </div>
 
-        <div class="info-msg">
-            <strong>ℹ️ Note:</strong> Data is stored locally in your browser. Students will appear here once they enroll.
+        <div class="dashboard-nav">
+            <button class="nav-btn active" onclick="switchSection('videos')">🎓 Learning Videos</button>
+            <button class="nav-btn" onclick="switchSection('profile')">👤 My Profile</button>
         </div>
 
-        <div style="text-align: center; margin-bottom: 3rem;">
-            <button class="apply-btn" style="max-width: 300px;" onclick="openModal('providerSignupModal')">+ Post New Job</button>
-        </div>
+        <div class="dashboard-content">
+            <!-- Videos Section -->
+            <div class="content-section active" id="videosSection">
+                <h2 style="color: var(--accent-cyan); text-align: center; margin-bottom: 2rem;">50+ Free Learning Videos</h2>
+                <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Master Coding & Video Editing from Expert YouTube Tutorials</p>
+                <div class="videos-grid" id="videosGrid">
+                    <!-- Videos will load here -->
+                </div>
+            </div>
 
-        <h2 style="color: var(--accent-cyan); text-align: center; margin-bottom: 2rem;">Enrolled Students</h2>
-        <div class="students-grid" id="studentsGrid">
-            <div class="glass-card" style="text-align: center; grid-column: 1/-1;">
-                <h3 style="color: var(--text-secondary);">No students enrolled yet</h3>
-                <p style="color: var(--text-secondary);">Students will appear here soon</p>
+            <!-- Profile Section -->
+            <div class="content-section" id="profileSection">
+                <div class="profile-card">
+                    <div class="profile-avatar" id="profileInitials">A</div>
+                    <h2 style="color: var(--accent-cyan); text-align: center; margin-bottom: 2rem;" id="profileNameHeading">Student Profile</h2>
+
+                    <div class="profile-item">
+                        <strong>📧 Email:</strong>
+                        <span id="profileEmail">-</span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>🎂 Age:</strong>
+                        <span id="profileAge">-</span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>🎓 Qualification:</strong>
+                        <span id="profileQualification">-</span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>🎯 Skills/Interests:</strong>
+                        <span id="profileSkills">-</span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>💰 Money Earned:</strong>
+                        <span id="profileMoney" style="color: var(--accent-pink); font-weight: 700;">₹0</span>
+                    </div>
+                    <div class="profile-item">
+                        <strong>📅 Joined:</strong>
+                        <span id="profileJoined">-</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Initialize localStorage
+        // Comprehensive YouTube Videos Database - Coding & Video Editing (English Only)
+        const youtubeVideos = [
+            // CODING - Python
+            { title: "Python Basics for Beginners", category: "Python", videoId: "rfscVS0vtik" },
+            { title: "Python Functions & Modules", category: "Python", videoId: "OWw6bwgpupY" },
+            { title: "Python OOP - Classes & Objects", category: "Python", videoId: "JeznW_7DlrQ" },
+            { title: "Python Web Development Django", category: "Python", videoId: "rHux0gMZ3Eg" },
+
+            // CODING - JavaScript
+            { title: "JavaScript Tutorial for Beginners", category: "JavaScript", videoId: "W6NZfCO5SIk" },
+            { title: "JavaScript ES6 Features", category: "JavaScript", videoId: "ZnK0pWMazZg" },
+            { title: "Async/Await in JavaScript", category: "JavaScript", videoId: "V_Kr9OSfDeU" },
+            { title: "JavaScript DOM Manipulation", category: "JavaScript", videoId: "wfoDRwcKPBI" },
+
+            // CODING - HTML/CSS
+            { title: "HTML Basics - Complete Guide", category: "Web", videoId: "mU6anWqZJcc" },
+            { title: "CSS Flexbox Explained", category: "Web", videoId: "qqDH0-_z1x8" },
+            { title: "CSS Grid Mastery", category: "Web", videoId: "EiNiSFaNAzI" },
+            { title: "Responsive Web Design", category: "Web", videoId: "srvUrASNj0s" },
+
+            // CODING - React
+            { title: "React.js Tutorial Beginner", category: "React", videoId: "SqcY0GlETPk" },
+            { title: "React Hooks Explained", category: "React", videoId: "TNhaISOUy6Q" },
+            { title: "React State & Props", category: "React", videoId: "ey7H8h4ub4E" },
+            { title: "Build a React Todo App", category: "React", videoId: "G7Z48tQjHjY" },
+
+            // CODING - Node.js
+            { title: "Node.js Crash Course", category: "Node.js", videoId: "PBTYxXADG_k" },
+            { title: "Express.js REST API", category: "Node.js", videoId: "L72fhGm1tfE" },
+            { title: "MongoDB with Node.js", category: "Node.js", videoId: "0bnvijmqVZo" },
+            { title: "Authentication in Node.js", category: "Node.js", videoId: "L7_ypR3f7gA" },
+
+            // CODING - SQL & Databases
+            { title: "SQL Tutorial - Beginners", category: "Database", videoId: "HXV3zeQKqGY" },
+            { title: "MySQL Database Design", category: "Database", videoId: "4zYJX3yNlYE" },
+            { title: "Database Normalization", category: "Database", videoId: "Rjh0qQR0vmo" },
+
+            // VIDEO EDITING - DaVinci Resolve
+            { title: "DaVinci Resolve Beginners Guide", category: "Video Editing", videoId: "c6vPK4nxSOs" },
+            { title: "Video Editing Basics - Cut & Trim", category: "Video Editing", videoId: "61rA0O2oCHI" },
+            { title: "Color Grading in Video", category: "Video Editing", videoId: "dSP3IGmW3zo" },
+            { title: "Add Transitions & Effects", category: "Video Editing", videoId: "0fLiZy5CgyE" },
+
+            // VIDEO EDITING - Adobe Premiere
+            { title: "Adobe Premiere Pro Tutorial", category: "Video Editing", videoId: "63Ln33O4p4c" },
+            { title: "Video Transitions Mastery", category: "Video Editing", videoId: "OEeFBq8xJEs" },
+            { title: "Green Screen Chroma Key", category: "Video Editing", videoId: "oU6FdZTqWbE" },
+            { title: "Audio Mixing for Videos", category: "Video Editing", videoId: "LY1_6qDEKnQ" },
+
+            // VIDEO EDITING - CapCut
+            { title: "CapCut Tutorial - Beginners", category: "Video Editing", videoId: "uGZ3pQ5K0aQ" },
+            { title: "CapCut Effects & Transitions", category: "Video Editing", videoId: "oQJKz6BqbQQ" },
+            { title: "How to Edit Videos Like TikTok", category: "Video Editing", videoId: "8xI9x7qZFBA" },
+
+            // VIDEO EDITING - Advanced
+            { title: "Motion Graphics & Animation", category: "Video Editing", videoId: "uljt8Vw-6kQ" },
+            { title: "Video Title & Text Effects", category: "Video Editing", videoId: "3Cmi9G8u3io" },
+            { title: "Keyframe Animation Basics", category: "Video Editing", videoId: "4F5LkpXQJBE" },
+            { title: "Video Speed Ramping", category: "Video Editing", videoId: "RZQtIdbKlAo" },
+
+            // CODING - Other Languages
+            { title: "Java Programming Basics", category: "Java", videoId: "eIrMbAQSU34" },
+            { title: "C++ Tutorial for Beginners", category: "C++", videoId: "vLnPJ8305LP" },
+            { title: "PHP Web Development", category: "PHP", videoId: "BUCisTNzGS8" },
+
+            // CODING - Git & Version Control
+            { title: "Git & GitHub Tutorial", category: "Tools", videoId: "RGOj5yH7evk" },
+            { title: "Command Line Basics", category: "Tools", videoId: "j6IsHBzDXbE" },
+
+            // VIDEO EDITING - YouTube Optimization
+            { title: "Optimize Videos for YouTube", category: "Video Editing", videoId: "eGFzFvyuAo8" },
+            { title: "YouTube Thumbnails Design", category: "Video Editing", videoId: "bZNTGzpqU0U" },
+            { title: "Video SEO & Analytics", category: "Video Editing", videoId: "uQ5nzQ0bYJc" }
+        ];
+
+        // Initialize App
         function initApp() {
-            if (!localStorage.getItem('teenskillbridge_students')) {
-                localStorage.setItem('teenskillbridge_students', JSON.stringify([]));
+            checkLoginStatus();
+            updateGlobalStats();
+        }
+
+        // Check if user is logged in
+        function checkLoginStatus() {
+            const currentUser = localStorage.getItem('teenskillbridge_currentUser');
+            if (currentUser) {
+                // User is logged in - show dashboard
+                document.getElementById('landingPage').classList.add('hidden');
+                document.getElementById('studentDashboard').classList.add('active');
+                loadUserProfile();
+                loadVideos();
             }
-            if (!localStorage.getItem('teenskillbridge_jobs')) {
-                localStorage.setItem('teenskillbridge_jobs', JSON.stringify([]));
+        }
+
+        // Update global statistics
+        function updateGlobalStats() {
+            const students = JSON.parse(localStorage.getItem('teenskillbridge_allStudents') || '[]');
+            const uniqueUsers = students.length;
+            const totalEarned = students.reduce((sum, s) => sum + (s.money || 0), 0);
+
+            document.getElementById('totalUsers').textContent = uniqueUsers;
+            document.getElementById('totalMoney').textContent = '₹' + totalEarned;
+            document.getElementById('totalStudents').textContent = uniqueUsers;
+            document.getElementById('totalJobs').textContent = Math.max(1, Math.floor(uniqueUsers * 0.5));
+        }
+
+        // Open Auth Modal
+        function openAuthModal(role) {
+            document.getElementById('authModal').classList.add('active');
+            document.getElementById('authModalOverlay').classList.add('active');
+            document.getElementById('signupForm').dataset.role = role;
+            document.getElementById('authTitle').textContent = role === 'student' ? 'Enroll as Student' : 'Enroll as Job Provider';
+
+            // Hide/show fields based on role
+            if (role === 'provider') {
+                document.getElementById('ageGroup').style.display = 'none';
+                document.getElementById('qualificationGroup').style.display = 'none';
+                document.getElementById('skillsGroup').style.display = 'none';
+            } else {
+                document.getElementById('ageGroup').style.display = 'block';
+                document.getElementById('qualificationGroup').style.display = 'block';
+                document.getElementById('skillsGroup').style.display = 'block';
             }
         }
 
-        // Modal functions
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
-            document.getElementById('modalOverlay').classList.add('active');
+        // Close Auth Modal
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('active');
+            document.getElementById('authModalOverlay').classList.remove('active');
         }
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
-            document.getElementById('modalOverlay').classList.remove('active');
-        }
-
-        function closeAllModals() {
-            document.getElementById('studentSignupModal').classList.remove('active');
-            document.getElementById('providerSignupModal').classList.remove('active');
-            document.getElementById('modalOverlay').classList.remove('active');
-        }
-
-        // Start signup
-        function startStudentSignup() {
-            openModal('studentSignupModal');
-        }
-
-        function startProviderSignup() {
-            openModal('providerSignupModal');
-        }
-
-        // Handle student signup
-        document.getElementById('studentSignupForm').addEventListener('submit', function(e) {
+        // Handle Signup
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const student = {
+            const role = this.dataset.role;
+            const userData = {
                 id: Date.now(),
-                name: document.getElementById('studentName').value,
-                email: document.getElementById('studentEmail').value,
-                age: document.getElementById('studentAge').value,
-                qualification: document.getElementById('studentQualification').value,
-                skills: document.getElementById('studentSkills').value,
-                enrolledDate: new Date().toLocaleDateString()
+                name: document.getElementById('signupName').value,
+                email: document.getElementById('signupEmail').value,
+                age: document.getElementById('signupAge').value || 'N/A',
+                qualification: document.getElementById('signupQualification').value || 'N/A',
+                skills: document.getElementById('signupSkills').value || 'N/A',
+                role: role,
+                money: 0,
+                joined: new Date().toLocaleDateString()
             };
 
-            // Save to localStorage
-            let students = JSON.parse(localStorage.getItem('teenskillbridge_students') || '[]');
-            students.push(student);
-            localStorage.setItem('teenskillbridge_students', JSON.stringify(students));
+            // Save to all students list
+            let allStudents = JSON.parse(localStorage.getItem('teenskillbridge_allStudents') || '[]');
+            allStudents.push(userData);
+            localStorage.setItem('teenskillbridge_allStudents', JSON.stringify(allStudents));
 
-            alert('✅ Enrollment successful! Welcome to Teen Skill Bridge! 🎉');
+            // Save current user
+            localStorage.setItem('teenskillbridge_currentUser', JSON.stringify(userData));
+
+            alert('✅ Account Created Successfully! Welcome to Teen Skill Bridge! 🎉');
             this.reset();
-            closeAllModals();
-            document.getElementById('landingPage').classList.add('hidden');
-            document.getElementById('studentDashboard').classList.add('active');
-            loadJobs();
+            closeAuthModal();
+
+            // Refresh the page to show dashboard
+            window.location.reload();
         });
 
-        // Handle provider job posting
-        document.getElementById('providerSignupForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const job = {
-                id: Date.now(),
-                title: document.getElementById('providerJobTitle').value,
-                gender: document.getElementById('providerGender').value,
-                salary: document.getElementById('providerSalary').value,
-                duration: document.getElementById('providerDuration').value,
-                workingDays: document.getElementById('providerWorkingDays').value,
-                email: document.getElementById('providerEmail').value,
-                postedDate: new Date().toLocaleDateString()
-            };
-
-            // Save to localStorage
-            let jobs = JSON.parse(localStorage.getItem('teenskillbridge_jobs') || '[]');
-            jobs.push(job);
-            localStorage.setItem('teenskillbridge_jobs', JSON.stringify(jobs));
-
-            alert('✅ Job posted successfully! 🎯');
-            this.reset();
-            closeAllModals();
-            document.getElementById('landingPage').classList.add('hidden');
-            document.getElementById('providerDashboard').classList.add('active');
-            loadStudents();
-        });
-
-        // Load jobs
-        function loadJobs() {
-            const jobs = JSON.parse(localStorage.getItem('teenskillbridge_jobs') || '[]');
-            const jobsGrid = document.getElementById('jobsGrid');
-
-            if (jobs.length === 0) {
-                jobsGrid.innerHTML = `
-                    <div class="glass-card" style="text-align: center; grid-column: 1/-1;">
-                        <h3 style="color: var(--text-secondary);">No jobs posted yet</h3>
-                        <p style="color: var(--text-secondary);">Check back soon for new opportunities!</p>
+        // Load Videos
+        function loadVideos() {
+            const videosGrid = document.getElementById('videosGrid');
+            videosGrid.innerHTML = youtubeVideos.map(video => `
+                <div class="video-card">
+                    <div class="video-thumbnail">🎬</div>
+                    <div class="video-info">
+                        <div class="video-title">${video.title}</div>
+                        <span class="video-category">${video.category}</span>
+                        <button class="watch-btn" onclick="window.open('https://www.youtube.com/watch?v=${video.videoId}', '_blank')">
+                            ▶️ Watch
+                        </button>
                     </div>
-                `;
-                return;
-            }
-
-            jobsGrid.innerHTML = jobs.map(job => `
-                <div class="job-card">
-                    <h3>${job.title}</h3>
-                    <div class="job-detail-item"><strong>💰 Salary:</strong> <span>₹${job.salary}</span></div>
-                    <div class="job-detail-item"><strong>⏰ Duration:</strong> <span>${job.duration}</span></div>
-                    <div class="job-detail-item"><strong>📅 Days:</strong> <span>${job.workingDays}</span></div>
-                    <div class="job-detail-item"><strong>👥 For:</strong> <span>${job.gender}</span></div>
-                    <button class="apply-btn" onclick="applyForJob('${job.email}', '${job.title}')">Apply Now →</button>
                 </div>
             `).join('');
         }
 
-        // Load students
-        function loadStudents() {
-            const students = JSON.parse(localStorage.getItem('teenskillbridge_students') || '[]');
-            const studentsGrid = document.getElementById('studentsGrid');
-
-            if (students.length === 0) {
-                studentsGrid.innerHTML = `
-                    <div class="glass-card" style="text-align: center; grid-column: 1/-1;">
-                        <h3 style="color: var(--text-secondary);">No students enrolled yet</h3>
-                        <p style="color: var(--text-secondary);">Students will appear here soon</p>
-                    </div>
-                `;
-                return;
+        // Load User Profile
+        function loadUserProfile() {
+            const currentUser = JSON.parse(localStorage.getItem('teenskillbridge_currentUser'));
+            if (currentUser) {
+                const initials = currentUser.name.split(' ').map(n => n[0]).join('').toUpperCase();
+                document.getElementById('studentName').textContent = currentUser.name;
+                document.getElementById('profileInitials').textContent = initials;
+                document.getElementById('profileNameHeading').textContent = currentUser.name;
+                document.getElementById('profileEmail').textContent = currentUser.email;
+                document.getElementById('profileAge').textContent = currentUser.age;
+                document.getElementById('profileQualification').textContent = currentUser.qualification;
+                document.getElementById('profileSkills').textContent = currentUser.skills;
+                document.getElementById('profileMoney').textContent = '₹' + (currentUser.money || 0);
+                document.getElementById('profileJoined').textContent = currentUser.joined;
             }
-
-            studentsGrid.innerHTML = students.map(student => {
-                const initials = student.name.split(' ').map(n => n[0]).join('').toUpperCase();
-                return `
-                    <div class="student-card">
-                        <div class="student-avatar">${initials}</div>
-                        <div class="student-info"><h3>${student.name}</h3></div>
-                        <div style="margin-top: 1.5rem;">
-                            <div class="student-detail"><strong>Email:</strong> <span>${student.email}</span></div>
-                            <div class="student-detail"><strong>Age:</strong> <span>${student.age}</span></div>
-                            <div class="student-detail"><strong>Qualification:</strong> <span>${student.qualification}</span></div>
-                        </div>
-                        <div class="skills-tags">
-                            ${student.skills.split(',').map(skill => `<span class="skill-tag">${skill.trim()}</span>`).join('')}
-                        </div>
-                        <button class="apply-btn" style="margin-top: 1.5rem;" onclick="contactStudent('${student.email}', '${student.name}')">Contact Student</button>
-                    </div>
-                `;
-            }).join('');
         }
 
-        // Helper functions
-        function goBack() {
-            document.getElementById('landingPage').classList.remove('hidden');
+        // Switch Section
+        function switchSection(section) {
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+
+            if (section === 'videos') {
+                document.getElementById('videosSection').classList.add('active');
+            } else if (section === 'profile') {
+                document.getElementById('profileSection').classList.add('active');
+            }
+        }
+
+        // Logout
+        function logout() {
+            localStorage.removeItem('teenskillbridge_currentUser');
             document.getElementById('studentDashboard').classList.remove('active');
-            document.getElementById('providerDashboard').classList.remove('active');
-        }
-
-        function applyForJob(email, jobTitle) {
-            window.location.href = `mailto:${email}?subject=Job Application: ${jobTitle} - Teen Skill Bridge`;
-        }
-
-        function contactStudent(email, studentName) {
-            window.location.href = `mailto:${email}?subject=Job Opportunity from Teen Skill Bridge`;
+            document.getElementById('landingPage').classList.remove('hidden');
+            window.location.reload();
         }
 
         // Initialize on load
