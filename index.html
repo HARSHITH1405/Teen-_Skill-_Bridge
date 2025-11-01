@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,8 +25,6 @@
             --text-secondary: #a0a0a0;
             --accent-cyan: #00F5FF;
             --accent-pink: #FF007F;
-            --accent-purple: #8A2BE2;
-            --accent-green: #00FF41;
         }
 
         body {
@@ -43,7 +41,6 @@
             padding: 0 2rem;
         }
 
-        /* Navigation */
         .navbar {
             position: fixed;
             top: 0;
@@ -72,71 +69,28 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .nav-menu {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--accent-cyan);
-        }
-
         .btn {
             padding: 0.75rem 1.5rem;
             border: none;
             border-radius: 8px;
             font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
-        }
-
-        .btn-primary {
             background: var(--primary-gradient);
             color: white;
         }
 
-        .btn-primary:hover {
+        .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--glass-border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--glass-bg);
-        }
-
-        /* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            position: relative;
-            overflow: hidden;
             margin-top: 60px;
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
         }
 
         .hero-content {
@@ -158,9 +112,6 @@
             font-size: 1.25rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .hero-stats {
@@ -187,26 +138,6 @@
             margin-top: 0.5rem;
         }
 
-        .hero-cta {
-            margin-top: 2rem;
-        }
-
-        /* Glass Cards */
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .glass-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Role Modal */
         .role-modal {
             display: none;
             position: fixed;
@@ -218,6 +149,7 @@
             z-index: 10000;
             justify-content: center;
             align-items: center;
+            padding: 2rem;
         }
 
         .role-modal.active {
@@ -230,9 +162,10 @@
             border: 2px solid rgba(255, 255, 255, 0.2);
             border-radius: 30px;
             padding: 3rem;
-            max-width: 600px;
+            max-width: 800px;
             text-align: center;
             animation: slideUp 0.5s ease;
+            width: 100%;
         }
 
         .role-content h2 {
@@ -245,26 +178,66 @@
 
         .role-content p {
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             font-size: 1.1rem;
         }
 
         .role-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 2rem;
             justify-content: center;
             flex-wrap: wrap;
         }
 
+        .role-option {
+            flex: 1;
+            min-width: 280px;
+            padding: 2rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .role-option:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .role-option h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .role-option p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-option .stat {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .role-option .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
         .role-btn {
-            padding: 1.2rem 2.5rem;
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 15px;
-            font-size: 1.1rem;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            min-width: 200px;
+            width: 100%;
         }
 
         .role-btn.student {
@@ -278,11 +251,10 @@
         }
 
         .role-btn:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
         }
 
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -299,6 +271,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 2rem;
         }
 
         .modal-content {
@@ -308,7 +281,7 @@
             border-radius: 16px;
             padding: 2rem;
             max-width: 500px;
-            width: 90%;
+            width: 100%;
             position: relative;
         }
 
@@ -333,7 +306,7 @@
             font-weight: 600;
         }
 
-        .form-input, .form-select, .form-textarea {
+        .form-input, .form-textarea {
             width: 100%;
             padding: 0.75rem;
             border: 1px solid var(--glass-border);
@@ -343,13 +316,12 @@
             font-family: inherit;
         }
 
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
+        .form-input:focus, .form-textarea:focus {
             outline: none;
             border-color: var(--accent-cyan);
             box-shadow: 0 0 0 2px rgba(0, 245, 255, 0.2);
         }
 
-        /* Student Dashboard */
         .student-dashboard {
             display: none;
             margin-top: 80px;
@@ -373,10 +345,6 @@
             margin-bottom: 1rem;
         }
 
-        .dashboard-header p {
-            color: var(--text-secondary);
-        }
-
         .dashboard-tabs {
             display: flex;
             justify-content: center;
@@ -391,7 +359,7 @@
             border-radius: 15px;
             background: rgba(255, 255, 255, 0.05);
             color: var(--text-primary);
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -402,10 +370,6 @@
             border-color: transparent;
         }
 
-        .tab-btn:hover {
-            transform: translateY(-2px);
-        }
-
         .tab-content {
             display: none;
         }
@@ -414,7 +378,6 @@
             display: block;
         }
 
-        /* Videos Grid */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -428,7 +391,6 @@
             overflow: hidden;
             transition: all 0.3s ease;
             border: 1px solid var(--glass-border);
-            cursor: pointer;
         }
 
         .video-card:hover {
@@ -443,7 +405,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
             font-size: 3rem;
         }
 
@@ -485,7 +446,6 @@
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
         }
 
-        /* Jobs Grid */
         .jobs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -513,12 +473,6 @@
             font-size: 1.5rem;
         }
 
-        .job-card p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
         .job-details {
             display: flex;
             flex-direction: column;
@@ -528,7 +482,6 @@
 
         .job-detail-item {
             display: flex;
-            align-items: center;
             gap: 0.5rem;
             color: var(--text-primary);
         }
@@ -560,14 +513,9 @@
             text-align: center;
             padding: 4rem 2rem;
             color: var(--text-secondary);
+            grid-column: 1/-1;
         }
 
-        .no-jobs h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Profile */
         .profile-card {
             background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -630,29 +578,15 @@
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-            .hero-title {
-                font-size: 2rem;
-            }
-            .video-grid {
-                grid-template-columns: 1fr;
-            }
-            .jobs-grid {
-                grid-template-columns: 1fr;
-            }
+            .role-buttons { flex-direction: column; }
+            .role-option { min-width: 100%; }
+            .video-grid { grid-template-columns: 1fr; }
+            .jobs-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -662,37 +596,36 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">🌟 Teen Skill Bridge</div>
-            <button class="btn btn-primary" onclick="document.getElementById('roleModal').classList.add('active')">Get Started</button>
+            <button class="btn" onclick="openRoleModal()">Get Started</button>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-background"></div>
         <div class="container">
             <div class="hero-content">
                 <h1 class="hero-title">From Broke to Boss</h1>
-                <p class="hero-subtitle">Stop asking for money. Start earning it. We help teens discover their talents, learn valuable skills, and connect with real opportunities to achieve financial independence.</p>
+                <p class="hero-subtitle">Stop asking for money. Start earning it. Learn skills and connect with real earning opportunities.</p>
                 <div class="hero-stats">
                     <div class="stat-item">
                         <div class="stat-number" id="totalVisitors">0</div>
-                        <div class="stat-label">Site Visitors</div>
+                        <div class="stat-label">Site Visitors 👥</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number" id="totalUsers">0</div>
-                        <div class="stat-label">Users Enrolled</div>
+                        <div class="stat-label">Users Enrolled ✅</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number" id="totalMoney">₹0</div>
-                        <div class="stat-label">Total Earned</div>
+                        <div class="stat-label">Total Earned 💰</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number" id="totalJobs">0</div>
-                        <div class="stat-label">Jobs Posted</div>
+                        <div class="stat-label">Jobs Posted 🎯</div>
                     </div>
                 </div>
-                <div class="hero-cta">
-                    <button class="btn btn-primary" onclick="document.getElementById('roleModal').classList.add('active')">Join the Movement</button>
+                <div style="margin-top: 2rem;">
+                    <button class="btn" onclick="openRoleModal()">🚀 Join the Movement</button>
                 </div>
             </div>
         </div>
@@ -702,10 +635,25 @@
     <div class="role-modal" id="roleModal">
         <div class="role-content">
             <h2>Welcome to Teen Skill Bridge!</h2>
-            <p>Choose your role to get started on your journey</p>
+            <p>Choose your role and start your journey today</p>
             <div class="role-buttons">
-                <button class="role-btn student" onclick="selectRole('student')">📚 Enroll as Student</button>
-                <button class="role-btn provider" onclick="selectRole('provider')">💼 Enroll as Job Provider</button>
+                <!-- Student Option -->
+                <div class="role-option">
+                    <h3>📚 Student</h3>
+                    <p>Learn new skills and earn money</p>
+                    <div class="stat" id="studentCount">0</div>
+                    <div class="stat-label">Users for Student</div>
+                    <button class="role-btn student" onclick="selectRole('student')">Enroll Now</button>
+                </div>
+
+                <!-- Job Provider Option -->
+                <div class="role-option">
+                    <h3>💼 Job Provider</h3>
+                    <p>Post jobs and find talented teens</p>
+                    <div class="stat" id="providerCount">0</div>
+                    <div class="stat-label">Users for Job Provider</div>
+                    <button class="role-btn provider" onclick="selectRole('provider')">Get Started</button>
+                </div>
             </div>
         </div>
     </div>
@@ -716,14 +664,12 @@
             <button class="modal-close" onclick="closeModal('authModal')">×</button>
             <h2 id="authTitle" style="margin-bottom: 2rem;">Sign Up</h2>
 
-            <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
-                <button class="btn btn-primary" style="flex: 1;" onclick="googleAuthStart()">🔵 Google</button>
-                <button class="btn btn-secondary" style="flex: 1;" onclick="appleAuth()">🍎 Mac/Apple</button>
+            <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                <button class="btn" style="flex: 1;" onclick="googleAuthStart()">🔵 Google</button>
+                <button class="btn" style="flex: 1; background: var(--secondary-gradient);" onclick="appleAuth()">🍎 Mac/Apple</button>
             </div>
 
-            <div style="text-align: center; margin: 1.5rem 0; color: var(--text-secondary); position: relative;">
-                <span style="background: var(--glass-bg); padding: 0 1rem; position: relative;">Or continue with email</span>
-            </div>
+            <div style="text-align: center; margin: 1.5rem 0; color: var(--text-secondary);">Or continue with email</div>
 
             <form id="signupForm">
                 <div class="form-group">
@@ -746,7 +692,7 @@
                     <label class="form-label">Skills/Interests *</label>
                     <textarea class="form-textarea" id="signupSkills" placeholder="e.g., Coding, Video Editing" required></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+                <button type="submit" class="btn" style="width: 100%;">Create Account</button>
             </form>
         </div>
     </div>
@@ -771,14 +717,14 @@
             <!-- Videos Tab -->
             <div class="tab-content active" id="videosTab">
                 <h2 style="color: var(--accent-cyan); text-align: center; margin-bottom: 1rem;">50+ Free Learning Videos</h2>
-                <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Master Coding & Video Editing from Expert YouTube Tutorials</p>
+                <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Master Coding & Video Editing</p>
                 <div class="video-grid" id="videosGrid"></div>
             </div>
 
             <!-- Earnings Tab -->
             <div class="tab-content" id="earningsTab">
-                <h2 style="color: var(--accent-green); text-align: center; margin-bottom: 1rem;">💰 Available Earning Opportunities</h2>
-                <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Browse registered jobs and apply to earn money</p>
+                <h2 style="color: #00FF41; text-align: center; margin-bottom: 1rem;">💰 Available Opportunities</h2>
+                <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">Browse and apply for jobs</p>
                 <div class="jobs-grid" id="jobsGrid"></div>
             </div>
 
@@ -813,89 +759,91 @@
     </div>
 
     <script>
-        // YouTube Videos Database (50+ videos - Coding & Video Editing)
         const youtubeVideos = [
-            // Python
-            { title: "Python Basics for Beginners", category: "Python", videoId: "rfscVS0vtik" },
-            { title: "Python Functions & Modules", category: "Python", videoId: "OWw6bwgpupY" },
-            { title: "Python OOP - Classes & Objects", category: "Python", videoId: "JeznW_7DlrQ" },
-            { title: "Python Web Development Django", category: "Python", videoId: "rHux0gMZ3Eg" },
-            // JavaScript
-            { title: "JavaScript Tutorial for Beginners", category: "JavaScript", videoId: "W6NZfCO5SIk" },
-            { title: "JavaScript ES6 Features", category: "JavaScript", videoId: "ZnK0pWMazZg" },
-            { title: "Async/Await in JavaScript", category: "JavaScript", videoId: "V_Kr9OSfDeU" },
-            { title: "JavaScript DOM Manipulation", category: "JavaScript", videoId: "wfoDRwcKPBI" },
-            // Web Development
-            { title: "HTML Basics - Complete Guide", category: "Web", videoId: "mU6anWqZJcc" },
-            { title: "CSS Flexbox Explained", category: "Web", videoId: "qqDH0-_z1x8" },
-            { title: "CSS Grid Mastery", category: "Web", videoId: "EiNiSFaNAzI" },
-            { title: "Responsive Web Design", category: "Web", videoId: "srvUrASNj0s" },
-            // React
-            { title: "React.js Tutorial Beginner", category: "React", videoId: "SqcY0GlETPk" },
-            { title: "React Hooks Explained", category: "React", videoId: "TNhaISOUy6Q" },
-            { title: "React State & Props", category: "React", videoId: "ey7H8h4ub4E" },
-            { title: "Build a React Todo App", category: "React", videoId: "G7Z48tQjHjY" },
-            // Node.js
-            { title: "Node.js Crash Course", category: "Node.js", videoId: "PBTYxXADG_k" },
-            { title: "Express.js REST API", category: "Node.js", videoId: "L72fhGm1tfE" },
-            { title: "MongoDB with Node.js", category: "Node.js", videoId: "0bnvijmqVZo" },
-            { title: "Authentication in Node.js", category: "Node.js", videoId: "L7_ypR3f7gA" },
-            // SQL & Databases
-            { title: "SQL Tutorial - Beginners", category: "Database", videoId: "HXV3zeQKqGY" },
-            { title: "MySQL Database Design", category: "Database", videoId: "4zYJX3yNlYE" },
+            { title: "Python Basics", category: "Python", videoId: "rfscVS0vtik" },
+            { title: "Python Functions", category: "Python", videoId: "OWw6bwgpupY" },
+            { title: "Python OOP", category: "Python", videoId: "JeznW_7DlrQ" },
+            { title: "Django Web Dev", category: "Python", videoId: "rHux0gMZ3Eg" },
+            { title: "JavaScript Basics", category: "JavaScript", videoId: "W6NZfCO5SIk" },
+            { title: "ES6 Features", category: "JavaScript", videoId: "ZnK0pWMazZg" },
+            { title: "Async/Await", category: "JavaScript", videoId: "V_Kr9OSfDeU" },
+            { title: "DOM Manipulation", category: "JavaScript", videoId: "wfoDRwcKPBI" },
+            { title: "HTML Basics", category: "Web", videoId: "mU6anWqZJcc" },
+            { title: "CSS Flexbox", category: "Web", videoId: "qqDH0-_z1x8" },
+            { title: "CSS Grid", category: "Web", videoId: "EiNiSFaNAzI" },
+            { title: "Responsive Design", category: "Web", videoId: "srvUrASNj0s" },
+            { title: "React Basics", category: "React", videoId: "SqcY0GlETPk" },
+            { title: "React Hooks", category: "React", videoId: "TNhaISOUy6Q" },
+            { title: "React State", category: "React", videoId: "ey7H8h4ub4E" },
+            { title: "React Todo App", category: "React", videoId: "G7Z48tQjHjY" },
+            { title: "Node.js Basics", category: "Node.js", videoId: "PBTYxXADG_k" },
+            { title: "Express.js", category: "Node.js", videoId: "L72fhGm1tfE" },
+            { title: "MongoDB", category: "Node.js", videoId: "0bnvijmqVZo" },
+            { title: "Node Auth", category: "Node.js", videoId: "L7_ypR3f7gA" },
+            { title: "SQL Basics", category: "Database", videoId: "HXV3zeQKqGY" },
+            { title: "MySQL Design", category: "Database", videoId: "4zYJX3yNlYE" },
             { title: "Database Normalization", category: "Database", videoId: "Rjh0qQR0vmo" },
-            // DaVinci Resolve
-            { title: "DaVinci Resolve Beginners", category: "Video Editing", videoId: "c6vPK4nxSOs" },
-            { title: "Video Editing Basics", category: "Video Editing", videoId: "61rA0O2oCHI" },
-            { title: "Color Grading in Video", category: "Video Editing", videoId: "dSP3IGmW3zo" },
-            { title: "Add Transitions & Effects", category: "Video Editing", videoId: "0fLiZy5CgyE" },
-            // Adobe Premiere
-            { title: "Adobe Premiere Pro Tutorial", category: "Video Editing", videoId: "63Ln33O4p4c" },
-            { title: "Video Transitions Mastery", category: "Video Editing", videoId: "OEeFBq8xJEs" },
-            { title: "Green Screen Chroma Key", category: "Video Editing", videoId: "oU6FdZTqWbE" },
-            { title: "Audio Mixing for Videos", category: "Video Editing", videoId: "LY1_6qDEKnQ" },
-            // CapCut
-            { title: "CapCut Tutorial - Beginners", category: "Video Editing", videoId: "uGZ3pQ5K0aQ" },
-            { title: "CapCut Effects & Transitions", category: "Video Editing", videoId: "oQJKz6BqbQQ" },
-            { title: "How to Edit Videos Like TikTok", category: "Video Editing", videoId: "8xI9x7qZFBA" },
-            // Advanced Video Editing
-            { title: "Motion Graphics & Animation", category: "Video Editing", videoId: "uljt8Vw-6kQ" },
-            { title: "Video Title & Text Effects", category: "Video Editing", videoId: "3Cmi9G8u3io" },
-            { title: "Keyframe Animation Basics", category: "Video Editing", videoId: "4F5LkpXQJBE" },
-            { title: "Video Speed Ramping", category: "Video Editing", videoId: "RZQtIdbKlAo" },
-            // Other Languages
-            { title: "Java Programming Basics", category: "Java", videoId: "eIrMbAQSU34" },
-            { title: "C++ Tutorial for Beginners", category: "C++", videoId: "vLnPJ8305LP" },
-            { title: "PHP Web Development", category: "PHP", videoId: "BUCisTNzGS8" },
-            // Tools
-            { title: "Git & GitHub Tutorial", category: "Tools", videoId: "RGOj5yH7evk" },
-            { title: "Command Line Basics", category: "Tools", videoId: "j6IsHBzDXbE" },
-            // YouTube Optimization
-            { title: "Optimize Videos for YouTube", category: "Video Editing", videoId: "eGFzFvyuAo8" },
-            { title: "YouTube Thumbnails Design", category: "Video Editing", videoId: "bZNTGzpqU0U" },
-            { title: "Video SEO & Analytics", category: "Video Editing", videoId: "uQ5nzQ0bYJc" },
-            { title: "Web Development Bootcamp", category: "Web", videoId: "jS4aFq5-91M" },
-            { title: "Full Stack JavaScript", category: "JavaScript", videoId: "Oe421EPjeBE" },
-            { title: "Machine Learning Basics", category: "Python", videoId: "HcqpanDmdqQ" }
+            { title: "DaVinci Basics", category: "Video Editing", videoId: "c6vPK4nxSOs" },
+            { title: "Video Editing", category: "Video Editing", videoId: "61rA0O2oCHI" },
+            { title: "Color Grading", category: "Video Editing", videoId: "dSP3IGmW3zo" },
+            { title: "Transitions", category: "Video Editing", videoId: "0fLiZy5CgyE" },
+            { title: "Adobe Premiere", category: "Video Editing", videoId: "63Ln33O4p4c" },
+            { title: "Video Transitions", category: "Video Editing", videoId: "OEeFBq8xJEs" },
+            { title: "Chroma Key", category: "Video Editing", videoId: "oU6FdZTqWbE" },
+            { title: "Audio Mixing", category: "Video Editing", videoId: "LY1_6qDEKnQ" },
+            { title: "CapCut Tutorial", category: "Video Editing", videoId: "uGZ3pQ5K0aQ" },
+            { title: "CapCut Effects", category: "Video Editing", videoId: "oQJKz6BqbQQ" },
+            { title: "TikTok Editing", category: "Video Editing", videoId: "8xI9x7qZFBA" },
+            { title: "Motion Graphics", category: "Video Editing", videoId: "uljt8Vw-6kQ" },
+            { title: "Text Effects", category: "Video Editing", videoId: "3Cmi9G8u3io" },
+            { title: "Keyframes", category: "Video Editing", videoId: "4F5LkpXQJBE" },
+            { title: "Speed Ramping", category: "Video Editing", videoId: "RZQtIdbKlAo" },
+            { title: "Java Basics", category: "Java", videoId: "eIrMbAQSU34" },
+            { title: "C++ Tutorial", category: "C++", videoId: "vLnPJ8305LP" },
+            { title: "PHP Web Dev", category: "PHP", videoId: "BUCisTNzGS8" },
+            { title: "Git Tutorial", category: "Tools", videoId: "RGOj5yH7evk" },
+            { title: "Command Line", category: "Tools", videoId: "j6IsHBzDXbE" },
+            { title: "YouTube Optimization", category: "Video Editing", videoId: "eGFzFvyuAo8" },
+            { title: "Thumbnails", category: "Video Editing", videoId: "bZNTGzpqU0U" },
+            { title: "Video SEO", category: "Video Editing", videoId: "uQ5nzQ0bYJc" },
+            { title: "Web Dev Bootcamp", category: "Web", videoId: "jS4aFq5-91M" },
+            { title: "Full Stack JS", category: "JavaScript", videoId: "Oe421EPjeBE" },
+            { title: "Machine Learning", category: "Python", videoId: "HcqpanDmdqQ" }
         ];
 
         let currentUserRole = 'student';
+        let visitorCounted = false;
 
-        // Initialize App
         function initApp() {
-            recordVisitor();
+            if (!visitorCounted && !localStorage.getItem('teenskillbridge_visited')) {
+                recordVisitor();
+                localStorage.setItem('teenskillbridge_visited', 'true');
+                visitorCounted = true;
+            }
             checkLoginStatus();
             updateStats();
         }
 
-        // Record Visitor
         function recordVisitor() {
             let visitors = parseInt(localStorage.getItem('teenskillbridge_visitors') || '0');
             visitors++;
             localStorage.setItem('teenskillbridge_visitors', visitors.toString());
         }
 
-        // Select Role
+        function openRoleModal() {
+            document.getElementById('roleModal').classList.add('active');
+            updateRoleCounts();
+        }
+
+        function updateRoleCounts() {
+            const users = JSON.parse(localStorage.getItem('teenskillbridge_allUsers') || '[]');
+            const students = users.filter(u => u.role === 'student').length;
+            const providers = users.filter(u => u.role === 'provider').length;
+
+            document.getElementById('studentCount').textContent = students;
+            document.getElementById('providerCount').textContent = providers;
+        }
+
         function selectRole(role) {
             currentUserRole = role;
             document.getElementById('roleModal').classList.remove('active');
@@ -913,49 +861,10 @@
             }
         }
 
-        // Google Auth
         function googleAuthStart() {
-            if (google && google.accounts && google.accounts.id) {
-                google.accounts.id.initialize({
-                    client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
-                    callback: handleGoogleAuth
-                });
-                google.accounts.id.prompt();
-            } else {
-                alert('Google Sign-In not available. Use Email instead.');
-            }
+            alert('Google Sign-In ready! (Replace with your Google Client ID)');
         }
 
-        // Handle Google Auth
-        function handleGoogleAuth(response) {
-            if (response.credential) {
-                const userData = parseGoogleJWT(response.credential);
-                const age = currentUserRole === 'student' ? prompt('Enter your age:') : null;
-                const qualification = currentUserRole === 'student' ? prompt('Enter your qualification:') : null;
-                const skills = currentUserRole === 'student' ? prompt('Enter your skills:') : null;
-
-                completeSignup({
-                    name: userData.name,
-                    email: userData.email,
-                    age: age || 'N/A',
-                    qualification: qualification || 'N/A',
-                    skills: skills || 'N/A',
-                    authType: 'Google'
-                });
-            }
-        }
-
-        // Parse Google JWT
-        function parseGoogleJWT(token) {
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-            return JSON.parse(jsonPayload);
-        }
-
-        // Apple Auth
         function appleAuth() {
             const name = prompt('Enter your name:');
             if (!name) return;
@@ -973,7 +882,6 @@
             });
         }
 
-        // Email Signup
         document.getElementById('signupForm').addEventListener('submit', function(e) {
             e.preventDefault();
             completeSignup({
@@ -986,7 +894,6 @@
             });
         });
 
-        // Complete Signup
         function completeSignup(userData) {
             const user = {
                 id: Date.now(),
@@ -1001,13 +908,12 @@
             localStorage.setItem('teenskillbridge_allUsers', JSON.stringify(allUsers));
             localStorage.setItem('teenskillbridge_currentUser', JSON.stringify(user));
 
-            alert('✅ Account Created! Welcome to Teen Skill Bridge! 🎉');
+            alert('✅ Account Created! Welcome!');
             closeModal('authModal');
             loadDashboard();
             updateStats();
         }
 
-        // Load Dashboard
         function loadDashboard() {
             const currentUser = JSON.parse(localStorage.getItem('teenskillbridge_currentUser'));
             if (currentUser) {
@@ -1019,7 +925,6 @@
             }
         }
 
-        // Load Videos
         function loadVideos() {
             const videosGrid = document.getElementById('videosGrid');
             videosGrid.innerHTML = youtubeVideos.map(video => `
@@ -1028,26 +933,18 @@
                     <div class="video-info">
                         <div class="video-title">${video.title}</div>
                         <span class="video-category">${video.category}</span>
-                        <button class="watch-btn" onclick="window.open('https://www.youtube.com/watch?v=${video.videoId}', '_blank')">
-                            ▶️ Watch
-                        </button>
+                        <button class="watch-btn" onclick="window.open('https://www.youtube.com/watch?v=${video.videoId}', '_blank')">▶️ Watch</button>
                     </div>
                 </div>
             `).join('');
         }
 
-        // Load Jobs
         function loadJobs() {
             const jobsGrid = document.getElementById('jobsGrid');
             const jobs = JSON.parse(localStorage.getItem('teenskillbridge_jobs') || '[]');
 
             if (jobs.length === 0) {
-                jobsGrid.innerHTML = `
-                    <div class="no-jobs" style="grid-column: 1/-1;">
-                        <h3>💼 No Jobs Available Yet</h3>
-                        <p>Check back soon for new earning opportunities!</p>
-                    </div>
-                `;
+                jobsGrid.innerHTML = `<div class="no-jobs"><h3>💼 No Jobs Yet</h3><p>Check back soon!</p></div>`;
                 return;
             }
 
@@ -1055,17 +952,16 @@
                 <div class="job-card">
                     <h3>${job.title}</h3>
                     <div class="job-details">
-                        <div class="job-detail-item"><strong>💰 Salary:</strong> <span>₹${job.salary}</span></div>
-                        <div class="job-detail-item"><strong>⏰ Duration:</strong> <span>${job.duration}</span></div>
-                        <div class="job-detail-item"><strong>📅 Days:</strong> <span>${job.workingDays}</span></div>
-                        <div class="job-detail-item"><strong>👥 For:</strong> <span>${job.gender}</span></div>
+                        <div class="job-detail-item"><strong>💰 Salary:</strong> ₹${job.salary}</div>
+                        <div class="job-detail-item"><strong>⏰ Duration:</strong> ${job.duration}</div>
+                        <div class="job-detail-item"><strong>📅 Days:</strong> ${job.workingDays}</div>
+                        <div class="job-detail-item"><strong>👥 For:</strong> ${job.gender}</div>
                     </div>
-                    <button class="apply-job-btn" onclick="applyJob('${job.email}', '${job.title}')">✅ Apply Now</button>
+                    <button class="apply-job-btn" onclick="applyJob('${job.email}', '${job.title}')">✅ Apply</button>
                 </div>
             `).join('');
         }
 
-        // Load Profile
         function loadProfile() {
             const currentUser = JSON.parse(localStorage.getItem('teenskillbridge_currentUser'));
             if (currentUser) {
@@ -1080,15 +976,12 @@
             }
         }
 
-        // Check Login Status
         function checkLoginStatus() {
-            const currentUser = localStorage.getItem('teenskillbridge_currentUser');
-            if (currentUser) {
+            if (localStorage.getItem('teenskillbridge_currentUser')) {
                 loadDashboard();
             }
         }
 
-        // Update Stats
         function updateStats() {
             const users = JSON.parse(localStorage.getItem('teenskillbridge_allUsers') || '[]');
             const jobs = JSON.parse(localStorage.getItem('teenskillbridge_jobs') || '[]');
@@ -1101,45 +994,37 @@
             document.getElementById('totalJobs').textContent = jobs.length;
         }
 
-        // Switch Tab
         function switchTab(tab) {
             document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
-            if (tab === 'videos') {
-                document.getElementById('videosTab').classList.add('active');
-            } else if (tab === 'earnings') {
+            if (tab === 'videos') document.getElementById('videosTab').classList.add('active');
+            else if (tab === 'earnings') {
                 document.getElementById('earningsTab').classList.add('active');
                 loadJobs();
-            } else if (tab === 'profile') {
-                document.getElementById('profileTab').classList.add('active');
             }
+            else if (tab === 'profile') document.getElementById('profileTab').classList.add('active');
         }
 
-        // Apply for Job
         function applyJob(email, jobTitle) {
-            window.location.href = `mailto:${email}?subject=Job Application: ${jobTitle}`;
+            window.location.href = `mailto:${email}?subject=Application: ${jobTitle}`;
         }
 
-        // Close Modal
         function closeModal(modalId) {
             document.getElementById(modalId).classList.remove('show');
         }
 
-        // Logout
         function logout() {
             localStorage.removeItem('teenskillbridge_currentUser');
             location.reload();
         }
 
-        // Go Back
         function goBack() {
             document.getElementById('studentDashboard').classList.remove('active');
             location.reload();
         }
 
-        // Initialize
         window.addEventListener('load', initApp);
     </script>
 </body>
